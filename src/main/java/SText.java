@@ -1,10 +1,14 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SText extends JFrame {
     private JButton saveButton;
@@ -21,22 +25,61 @@ public class SText extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(SText);
+        ImageIcon img = new ImageIcon("src/main/resources/images/SText.png");
+        setIconImage(img.getImage());
         setVisible(true);
+
         lightDarkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                darkModeSelected=!darkModeSelected;
-                if(darkModeSelected){
+                darkModeSelected = !darkModeSelected;
+                if (darkModeSelected) {
                     setLookAndFeel(new FlatDarkLaf());
-                }else{
+                } else {
                     setLookAndFeel(new FlatLightLaf());
                 }
             }
         });
+
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("Text Files (*.txt)", "txt");
+                FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("CSV Files (*.csv)", "csv");
+                fileChooser.addChoosableFileFilter(txtFilter);
+                fileChooser.addChoosableFileFilter(csvFilter);
+                fileChooser.setFileFilter(txtFilter);
+
+                int option = fileChooser.showSaveDialog(SText.this);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    String filePath = file.getAbsolutePath();
+                    String selectedExtension = "";
+
+                    if (fileChooser.getFileFilter() == txtFilter) {
+                        selectedExtension = ".txt";
+                    } else if (fileChooser.getFileFilter() == csvFilter) {
+                        selectedExtension = ".csv";
+                    }
+
+                    if (!filePath.endsWith(selectedExtension)) {
+                        file = new File(filePath + selectedExtension);
+                    }
+
+                    try (FileWriter writer = new FileWriter(file)) {
+                        writer.write(textArea1.getText());
+                    } catch (IOException ioException) {
+                        //ioException.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -46,16 +89,15 @@ public class SText extends JFrame {
             UIManager.setLookAndFeel(laf);
             SwingUtilities.updateComponentTreeUI(this);
         } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
-
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         SwingUtilities.invokeLater(() -> new SText());
