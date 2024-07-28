@@ -26,7 +26,7 @@
           <component id="9de1b" class="javax.swing.JButton" binding="saveButton" default-binding="true">
             <constraints/>
             <properties>
-              <text value="Save"/>
+              <text value="Save as"/>
             </properties>
           </component>
           <component id="ff67" class="javax.swing.JButton" binding="lightDarkButton" default-binding="true">

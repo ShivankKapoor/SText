@@ -19,7 +19,7 @@ public class SText extends JFrame {
 
     public SText() {
         setTitle("SText");
-        setSize(700, 500);
+        setSize(1300, 900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(SText);
