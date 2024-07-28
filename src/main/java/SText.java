@@ -6,9 +6,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class SText extends JFrame {
     private JButton saveButton;
@@ -21,7 +19,7 @@ public class SText extends JFrame {
 
     public SText() {
         setTitle("SText");
-        setSize(700, 500);
+        setSize(1300, 900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(SText);
@@ -76,6 +74,32 @@ public class SText extends JFrame {
 
                     try (FileWriter writer = new FileWriter(file)) {
                         writer.write(textArea1.getText());
+                    } catch (IOException ioException) {
+                        //ioException.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("Text Files (*.txt)", "txt");
+                FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("CSV Files (*.csv)", "csv");
+                fileChooser.addChoosableFileFilter(txtFilter);
+                fileChooser.addChoosableFileFilter(csvFilter);
+                fileChooser.setFileFilter(txtFilter);
+
+                int option = fileChooser.showOpenDialog(SText.this);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                        textArea1.setText("");
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            textArea1.append(line + "\n");
+                        }
                     } catch (IOException ioException) {
                         //ioException.printStackTrace();
                     }
