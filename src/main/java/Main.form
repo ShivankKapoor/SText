@@ -35,6 +35,15 @@
               <text value="Light/Dark"/>
             </properties>
           </component>
+          <hspacer id="967e">
+            <constraints/>
+          </hspacer>
+          <component id="1fd13" class="javax.swing.JButton" binding="exitButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Exit"/>
+            </properties>
+          </component>
         </children>
       </toolbar>
       <vspacer id="36d67">

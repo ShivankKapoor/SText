@@ -12,6 +12,7 @@ public class SText extends JFrame {
     private JTextArea textArea1;
     private JPanel SText;
     private JButton lightDarkButton;
+    private JButton exitButton;
     private boolean darkModeSelected = false;
 
     public SText() {
