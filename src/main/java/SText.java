@@ -33,6 +33,12 @@ public class SText extends JFrame {
                 }
             }
         });
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     private void setLookAndFeel(LookAndFeel laf) {
