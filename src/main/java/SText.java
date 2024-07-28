@@ -21,6 +21,8 @@ public class SText extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(SText);
+        ImageIcon img = new ImageIcon("src/main/resources/images/SText.png");
+        setIconImage(img.getImage());
         setVisible(true);
         lightDarkButton.addActionListener(new ActionListener() {
             @Override
