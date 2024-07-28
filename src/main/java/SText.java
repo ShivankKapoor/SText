@@ -82,6 +82,13 @@ public class SText extends JFrame {
                 }
             }
         });
+
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     private void setLookAndFeel(LookAndFeel laf) {
