@@ -6,7 +6,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main extends JFrame {
+public class SText extends JFrame {
     private JButton saveButton;
     private JButton openButton;
     private JTextArea textArea1;
@@ -14,10 +14,11 @@ public class Main extends JFrame {
     private JButton lightDarkButton;
     private boolean darkModeSelected = false;
 
-    public Main() {
+    public SText() {
         setTitle("SText");
         setSize(700, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setContentPane(SText);
         setVisible(true);
         lightDarkButton.addActionListener(new ActionListener() {
@@ -50,6 +51,6 @@ public class Main extends JFrame {
             e.printStackTrace();
         }
 
-        SwingUtilities.invokeLater(() -> new Main());
+        SwingUtilities.invokeLater(() -> new SText());
     }
 }
